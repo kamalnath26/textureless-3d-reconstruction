@@ -1,0 +1,13 @@
+{
+    "camera_name": "buddha_camera",
+    "width": 1080,
+    "height": 1920,
+    "fx": 1718.11,
+    "fy": 1718.11,
+    "cx": 540.0,
+    "cy": 960.0,
+    "depth_scale": 0.001,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [0.027, 0.0, 0.0, 0.0, 0.0],
+    "notes": "Intrinsics from COLMAP SIMPLE_RADIAL model (averaged over 24 frames). Only k1 radial distortion estimated."
+}

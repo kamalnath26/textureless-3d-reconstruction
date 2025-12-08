@@ -1,0 +1,13 @@
+{
+    "camera_name": "realsense_d455",
+    "width": 640,
+    "height": 480,
+    "fx": 382.193,
+    "fy": 382.193,
+    "cx": 320.819,
+    "cy": 237.683,
+    "depth_scale": 0.001,
+    "distortion_model": "plumb_bob",
+    "distortion_coefficients": [0.0, 0.0, 0.0, 0.0, 0.0],
+    "notes": "RealSense D455 default intrinsics at 640x480 resolution"
+}
