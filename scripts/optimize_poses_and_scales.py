@@ -107,19 +107,19 @@ with open("per_image_depth_ranges.json", "r") as f:
 depth_lookup = {item['img_id']: item for item in depth_ranges}
 
 #-------------------Temp_-------------------#
-print("\n=== DEBUG: Checking Depth Variation ===")
-for i in range(min(3, len(depth_maps))):
-    if i in depth_lookup:
-        depth_info = depth_lookup[i]
-        depth_normalized = depth_maps[i]
-        depth_relative = depth_normalized * (depth_info['max'] - depth_info['min']) + depth_info['min']
+# print("\n=== DEBUG: Checking Depth Variation ===")
+# for i in range(min(3, len(depth_maps))):
+#     if i in depth_lookup:
+#         depth_info = depth_lookup[i]
+#         depth_normalized = depth_maps[i]
+#         depth_relative = depth_normalized * (depth_info['max'] - depth_info['min']) + depth_info['min']
         
-        print(f"\nImage {i}:")
-        print(f"  Normalized depth: [{depth_normalized.min():.3f}, {depth_normalized.max():.3f}]")
-        print(f"  Std: {depth_normalized.std():.3f}")
-        print(f"  Depth range from JSON: [{depth_info['min']:.3f}, {depth_info['max']:.3f}]")
-        print(f"  Relative depth: [{depth_relative.min():.3f}, {depth_relative.max():.3f}]")
-        print(f"  Median depth: {np.median(depth_relative):.3f}")
+#         print(f"\nImage {i}:")
+#         print(f"  Normalized depth: [{depth_normalized.min():.3f}, {depth_normalized.max():.3f}]")
+#         print(f"  Std: {depth_normalized.std():.3f}")
+#         print(f"  Depth range from JSON: [{depth_info['min']:.3f}, {depth_info['max']:.3f}]")
+#         print(f"  Relative depth: [{depth_relative.min():.3f}, {depth_relative.max():.3f}]")
+#         print(f"  Median depth: {np.median(depth_relative):.3f}")
 #_------------------------------#
 # Load per-image depth ranges
 
@@ -205,13 +205,6 @@ print(f"Created {len(constraints)} constraints from {len(all_matches)} pairs")
 print("\n=== Setting Up Optimization ===")
 
 def residuals(x, constraints, K):
-    """
-    Compute residuals for all constraints
-    
-    x layout:
-    - First 6*n_cameras elements: camera poses as [rx,ry,rz,tx,ty,tz] for each camera
-    - Last n_cameras elements: depth scales for each camera
-    """
     n_cams = n_cameras
     
     # Extract poses
