@@ -51,7 +51,7 @@ python depth_processor.py --source camera --intrinsics camera_intrinsics.json \
 
 there are so many options refer to main function in the code to use more combinations of input or output
 
-## ROS 2 Monocular SLAM Pipeline
+## RTAB + DepthAnything SLAM Pipeline
 
 Make sure to source your workspace first:
 ```bash
@@ -59,19 +59,19 @@ cd ros2_ws
 source install/setup.bash
 ```
 
-### 1. Run with a Video File
+1. Run with a Video File
 This uses `simple_camera_node` to play a video file in a loop.
 ```bash
-ros2 launch monocular_slam slam.launch.py video_path:=/absolute/path/to/your_video.mp4
+ros2 launch monocular_slam slam.launch.py video_path:=/path/to/video.mp4
 ```
 
-### 2. Run with a Database (RTAB-Map DB)
+2. Run with a Database (RTAB-Map DB)
 This uses `db_player_node` to replay images and calibration from a recorded database.
 ```bash
-ros2 launch monocular_slam slam.launch.py db_path:=/absolute/path/to/your_database.db
+ros2 launch monocular_slam slam.launch.py db_path:=/path/to/database.db
 ```
 
-### 3. Run with Live Webcam
+3. Run with Live Webcam
 This uses `simple_camera_node` with the default video device (usually `/dev/video0`).
 ```bash
 ros2 launch monocular_slam slam.launch.py
