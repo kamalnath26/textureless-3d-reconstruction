@@ -1,0 +1,5 @@
+[console_scripts]
+db_player_node = monocular_slam.db_player_node:main
+depth_anything_node = monocular_slam.depth_anything_node:main
+droid_slam_node = monocular_slam.droid_slam_node:main
+simple_camera_node = monocular_slam.simple_camera_node:main

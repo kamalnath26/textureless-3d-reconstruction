@@ -1,0 +1,6 @@
+source;share/monocular_slam/hook/pythonpath.ps1
+source;share/monocular_slam/hook/pythonpath.dsv
+source;share/monocular_slam/hook/pythonpath.sh
+source;share/monocular_slam/hook/ament_prefix_path.ps1
+source;share/monocular_slam/hook/ament_prefix_path.dsv
+source;share/monocular_slam/hook/ament_prefix_path.sh
