@@ -1,4 +1,4 @@
-## Sample commands to use
+## Sample commands to use reconstruction.py
 
 From a folder of images:
 
@@ -50,3 +50,36 @@ python depth_processor.py --source camera --intrinsics camera_intrinsics.json \
 ```
 
 there are so many options refer to main function in the code to use more combinations of input or output
+
+## exmaple usage of depth_enhanced_reconstruction.py
+
+```bash
+python depth_enhanced_reconstruction.py --input ./input_folder/buddha_images --output ./output --fx 1719 --fy 1719 --cx 540 --cy 960
+```
+
+## exmaple usage of depth_to_reconstruction.py
+
+```bash
+python depth_to_reconstruction.py --rgb-folder ./input_folder/buddha_images --depth-folder ./depth_output/depth_images --output ./reconstruction.ply --fx 1719 --fy 1719 --cx 540 --cy 960
+```
+
+refer to top of pyhton script and the main function for more args that supported by these scripts
+
+link for dataset collected: [link](https://northeastern-my.sharepoint.com/my?id=%2Fpersonal%2Fbathirappan%5Fk%5Fnortheastern%5Fedu%2FDocuments%2FAFR%20Project%2Fdataset&viewid=f174bb69%2D4814%2D4f8b%2Db313%2Dbd3ab70a5678&login_hint=bathirappan%2Ek%40northeastern%2Eedu&source=waffle)
+
+link for outputs:[link](https://northeastern-my.sharepoint.com/my?id=%2Fpersonal%2Fbathirappan%5Fk%5Fnortheastern%5Fedu%2FDocuments%2FAFR%20Project%2Foutput%5Ffolder&viewid=f174bb69%2D4814%2D4f8b%2Db313%2Dbd3ab70a5678&login_hint=bathirappan%2Ek%40northeastern%2Eedu&source=waffle)
+
+<video  controls>
+  <source src="./output_folder/reconstruction_buddha_derc.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video  controls>
+  <source src="./output_folder/exp_no_feature_data_left_to_right_derc_pcl.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+<video  controls>
+  <source src="./output_folder/exp_tunnel_set_1_derc_pcl.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
