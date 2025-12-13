@@ -84,7 +84,7 @@ link for outputs:[link](https://northeastern-my.sharepoint.com/my?id=%2Fpersonal
   <source src="./output_folder/exp_tunnel_set_1_derc_pcl.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
-=======
+
 ## ROS 2 Monocular SLAM Pipeline
 
 Make sure to source your workspace first:
@@ -110,4 +110,4 @@ This uses `simple_camera_node` with the default video device (usually `/dev/vide
 ```bash
 ros2 launch monocular_slam slam.launch.py
 ```
->>>>>>> 080c28e0cc703cbb7db0c9ad59db66d0fa8ee787
+
