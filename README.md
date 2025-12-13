@@ -51,6 +51,7 @@ python depth_processor.py --source camera --intrinsics camera_intrinsics.json \
 
 there are so many options refer to main function in the code to use more combinations of input or output
 
+<<<<<<< HEAD
 ## exmaple usage of depth_enhanced_reconstruction.py
 
 ```bash
@@ -83,3 +84,30 @@ link for outputs:[link](https://northeastern-my.sharepoint.com/my?id=%2Fpersonal
   <source src="./output_folder/exp_tunnel_set_1_derc_pcl.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
+=======
+## ROS 2 Monocular SLAM Pipeline
+
+Make sure to source your workspace first:
+```bash
+cd ros2_ws
+source install/setup.bash
+```
+
+### 1. Run with a Video File
+This uses `simple_camera_node` to play a video file in a loop.
+```bash
+ros2 launch monocular_slam slam.launch.py video_path:=/absolute/path/to/your_video.mp4
+```
+
+### 2. Run with a Database (RTAB-Map DB)
+This uses `db_player_node` to replay images and calibration from a recorded database.
+```bash
+ros2 launch monocular_slam slam.launch.py db_path:=/absolute/path/to/your_database.db
+```
+
+### 3. Run with Live Webcam
+This uses `simple_camera_node` with the default video device (usually `/dev/video0`).
+```bash
+ros2 launch monocular_slam slam.launch.py
+```
+>>>>>>> 080c28e0cc703cbb7db0c9ad59db66d0fa8ee787

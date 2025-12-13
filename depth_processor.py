@@ -246,8 +246,7 @@ class DepthAnythingModel:
         
         # Load checkpoint
         if checkpoint_path and os.path.exists(checkpoint_path):
-            # state_dict = torch.load(checkpoint_path, map_location='cpu')
-            state_dict = torch.load(checkpoint_path, map_location='gpu')
+            state_dict = torch.load(checkpoint_path, map_location='cpu')
             model.load_state_dict(state_dict)
             logger.info(f"Loaded checkpoint from {checkpoint_path}")
         else:
@@ -259,8 +258,6 @@ class DepthAnythingModel:
         """Load model using Hugging Face transformers"""
         from transformers import AutoImageProcessor, AutoModelForDepthEstimation
         
-        # Model mapping - using correct HF model names
-        # Note: Metric models use different naming convention
         model_map = {
             ('v1', 'vits'): 'LiheYoung/depth-anything-small-hf',
             ('v1', 'vitb'): 'LiheYoung/depth-anything-base-hf',
@@ -270,13 +267,11 @@ class DepthAnythingModel:
             ('v2', 'vitl'): 'depth-anything/Depth-Anything-V2-Large-hf',
         }
         
-        # Metric models have different naming and may require authentication
         if self.metric:
-            dataset_name = "Indoor" if self.dataset == "hypersim" else "Outdoor"
             model_map.update({
-                ('v2', 'vits'): f'depth-anything/Depth-Anything-V2-Metric-{dataset_name}-Small-hf',
-                ('v2', 'vitb'): f'depth-anything/Depth-Anything-V2-Metric-{dataset_name}-Base-hf',
-                ('v2', 'vitl'): f'depth-anything/Depth-Anything-V2-Metric-{dataset_name}-Large-hf',
+                ('v2', 'vits'): f'depth-anything/Depth-Anything-V2-Metric-{"Hypersim" if self.dataset == "hypersim" else "VKITTI"}-Small-hf',
+                ('v2', 'vitb'): f'depth-anything/Depth-Anything-V2-Metric-{"Hypersim" if self.dataset == "hypersim" else "VKITTI"}-Base-hf',
+                ('v2', 'vitl'): f'depth-anything/Depth-Anything-V2-Metric-{"Hypersim" if self.dataset == "hypersim" else "VKITTI"}-Large-hf',
             })
         
         model_name = model_map.get((self.version, self.encoder))
@@ -284,28 +279,8 @@ class DepthAnythingModel:
             raise ValueError(f"No Hugging Face model for {self.version}/{self.encoder}")
         
         logger.info(f"Loading from Hugging Face: {model_name}")
-        
-        try:
-            self.processor = AutoImageProcessor.from_pretrained(model_name)
-            model = AutoModelForDepthEstimation.from_pretrained(model_name)
-        except Exception as e:
-            logger.warning(f"Failed to load {model_name}: {e}")
-            logger.info("Trying non-metric model as fallback...")
-            # Fallback to non-metric model
-            fallback_map = {
-                ('v2', 'vits'): 'depth-anything/Depth-Anything-V2-Small-hf',
-                ('v2', 'vitb'): 'depth-anything/Depth-Anything-V2-Base-hf',
-                ('v2', 'vitl'): 'depth-anything/Depth-Anything-V2-Large-hf',
-            }
-            model_name = fallback_map.get((self.version, self.encoder))
-            if model_name:
-                logger.info(f"Loading fallback model: {model_name}")
-                self.processor = AutoImageProcessor.from_pretrained(model_name)
-                model = AutoModelForDepthEstimation.from_pretrained(model_name)
-                logger.warning("Using relative depth model - output will NOT be in meters!")
-            else:
-                raise
-        
+        self.processor = AutoImageProcessor.from_pretrained(model_name)
+        model = AutoModelForDepthEstimation.from_pretrained(model_name)
         self._use_transformers = True
         return model
     
@@ -1008,7 +983,7 @@ def parse_args():
                             help='Path to model checkpoint')
     model_group.add_argument('--metric', action='store_true',
                             help='Use metric depth model')
-    model_group.add_argument('--max_depth', type=float, default=20.0,
+    model_group.add_argument('--max-depth', type=float, default=20.0,
                             help='Maximum depth for metric models (20 indoor, 80 outdoor)')
     model_group.add_argument('--dataset', type=str, default='hypersim',
                             choices=['hypersim', 'vkitti'],
@@ -1051,7 +1026,7 @@ def parse_args():
                              help='Output mode')
     output_group.add_argument('--pointcloud-downsample', type=int, default=1,
                              help='Point cloud downsampling factor')
-    output_group.add_argument('--min_depth', type=float, default=0.1,
+    output_group.add_argument('--min-depth', type=float, default=0.1,
                              help='Minimum valid depth (meters)')
     output_group.add_argument('--colormap', type=str, default='jet',
                              choices=['jet', 'magma', 'inferno', 'viridis', 'plasma', 'turbo'],
