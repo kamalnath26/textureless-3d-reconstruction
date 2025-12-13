@@ -51,7 +51,6 @@ python depth_processor.py --source camera --intrinsics camera_intrinsics.json \
 
 there are so many options refer to main function in the code to use more combinations of input or output
 
-<<<<<<< HEAD
 ## exmaple usage of depth_enhanced_reconstruction.py
 
 ```bash
